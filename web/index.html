@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
+  <title>ASSAY — Lector local de rasgos de ADN</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%A7%AC%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Capa de arrastre a pantalla completa -->
+  <div id="drag-overlay" aria-hidden="true"><div>Suelta tu archivo de ADN para leerlo — localmente</div></div>
+
+  <!-- Barra de instrumento: franja de estado tipo hardware -->
+  <header class="instrument-bar" role="banner">
+    <div class="ib-brand">
+      <span class="ib-mark" aria-hidden="true">🧬</span>
+      <span class="ib-title">ASSAY</span>
+      <span class="ib-sub">lector local de rasgos de ADN</span>
+    </div>
+    <div class="ib-readout" id="ib-readout">
+      <div class="ib-stat"><span class="ib-label">proveedor</span><span class="ib-value" id="stat-vendor">—</span></div>
+      <div class="ib-stat"><span class="ib-label">versión</span><span class="ib-value" id="stat-build">—</span></div>
+      <div class="ib-stat"><span class="ib-label">SNPs</span><span class="ib-value mono" id="stat-snps">0</span></div>
+      <div class="ib-stat"><span class="ib-label">coincidencias</span><span class="ib-value mono" id="stat-matches">0</span></div>
+    </div>
+    <div class="ib-actions">
+      <button id="btn-freshness" class="btn-ghost" type="button" title="Fuentes de datos y actualidad">
+        <span class="dot" id="fresh-dot"></span> Fuentes de datos
+      </button>
+      <button id="btn-theme" class="btn-ghost icon" type="button" title="Cambiar claro/oscuro" aria-label="Cambiar tema">◐</button>
+      <button id="btn-reset" class="btn-ghost" type="button" hidden>Cargar otro archivo</button>
+    </div>
+  </header>
+
+  <!-- Aviso permanente y no descartable -->
+  <div class="disclaimer" role="note" id="disclaimer-banner">
+    <strong>Solo con fines educativos y de investigación — no es un diagnóstico.</strong>
+    <span id="disclaimer-text">Todo se ejecuta localmente; tu ADN nunca sale de esta máquina. Los genotipos de datos
+    crudos de consumo tienen una alta tasa de falsos positivos (~40%) para variantes clínicamente relevantes —
+    confirma cualquier resultado de salud con una prueba de grado clínico y un/a profesional.</span>
+  </div>
+
+  <!-- Barra de progreso determinada (sin ruedas infinitas) -->
+  <div class="meter" id="meter" hidden><div class="meter-fill" id="meter-fill"></div></div>
+
+  <main class="layout">
+    <!-- Estado inicial / vacío -->
+    <section id="landing" class="landing">
+      <div class="drop" id="dropzone" tabindex="0" role="button"
+           aria-label="Sube un archivo de ADN — arrastra y suelta o pulsa Enter para explorar">
+        <div class="drop-inner">
+          <div class="drop-icon" aria-hidden="true">⇪</div>
+          <h1 class="drop-title">Suelta tu archivo de ADN</h1>
+          <p class="drop-help">23andMe · AncestryDNA · FamilyTreeDNA · MyHeritage · LivingDNA · tellmeGen · CSV/TSV</p>
+          <p class="drop-privacy">Se procesa <strong>en tu dispositivo</strong> — los archivos nunca salen de esta máquina, no se suben ni se guardan.</p>
+          <button class="btn-primary" id="btn-browse" type="button">Elegir un archivo…</button>
+          <input type="file" id="file-input" accept=".txt,.csv,.tsv,.zip,.gz" hidden />
+        </div>
+      </div>
+      <ol class="steps">
+        <li><span class="step-n">1</span> Suelta un archivo — se procesa localmente en segundos.</li>
+        <li><span class="step-n">2</span> Los rasgos aparecen agrupados por categoría, con fuente y fecha.</li>
+        <li><span class="step-n">3</span> Nada se sube, se registra ni se guarda. Al recargar, desaparece.</li>
+      </ol>
+      <p class="landing-error" id="landing-error" hidden></p>
+    </section>
+
+    <!-- Vista de resultados -->
+    <section id="results-view" class="results-view" hidden>
+      <nav class="rail" id="category-rail" aria-label="Categorías de rasgos">
+        <button class="rail-item active" data-cat="__all__">
+          <span class="rail-label">Todos los resultados</span><span class="rail-count mono" data-count>0</span>
+        </button>
+        <!-- las categorías se insertan aquí -->
+      </nav>
+
+      <div class="results-main">
+        <div class="toolbar">
+          <div class="search-wrap">
+            <input type="search" id="search" placeholder="Filtrar por rasgo, gen o rsID…" aria-label="Filtrar resultados" />
+            <span class="search-count mono" id="search-count" aria-live="polite"></span>
+          </div>
+          <label class="chk"><input type="checkbox" id="filter-effect" /> Solo genotipos con efecto</label>
+        </div>
+
+        <div class="health-gate" id="health-gate" hidden>
+          <div class="health-gate-body">
+            <strong>Los resultados relacionados con la salud están ocultos.</strong>
+            Estas variantes (portador, riesgo de enfermedad, respuesta a fármacos) requieren cuidado extra y
+            confirmación clínica. Se encontraron <span class="mono" id="health-count-inline">0</span>.
+            <p class="health-gate-detail" id="health-gate-detail"></p>
+            <p class="health-gate-fp" id="health-gate-fp"></p>
+          </div>
+          <button class="btn-primary small" id="btn-show-health" type="button">Ver resultados de salud</button>
+        </div>
+
+        <div id="results" class="results" aria-live="polite"></div>
+        <div id="empty-note" class="empty-note" hidden></div>
+
+        <div id="selection-bar" class="selection-bar" role="region" aria-label="Acciones de selección" hidden>
+          <span class="sel-count mono" id="sel-count" aria-live="polite">0 seleccionados</span>
+          <div class="sel-actions">
+            <button type="button" class="btn-ghost" id="btn-select-visible">Seleccionar todos los visibles</button>
+            <button type="button" class="btn-ghost" id="btn-clear-sel">Limpiar</button>
+            <button type="button" class="btn-ghost" id="btn-report-html">Descargar HTML</button>
+            <button type="button" class="btn-primary small" id="btn-report-print">Imprimir / PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Panel de fuentes de datos / actualidad -->
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="drawer" id="freshness-drawer" hidden aria-label="Fuentes de datos de anotación">
+    <div class="drawer-head">
+      <h2>Fuentes de datos de anotación</h2>
+      <button class="btn-ghost icon" id="btn-close-drawer" aria-label="Cerrar">✕</button>
+    </div>
+    <p class="drawer-lede">La única vez que esta app usa la red es para descargar estas bases de datos
+      <strong>públicas</strong> de anotación — nunca tus genotipos.</p>
+    <div id="sources-list" class="sources-list"></div>
+    <div class="drawer-actions">
+      <button class="btn-primary" id="btn-update" type="button">Actualizar desde bases públicas</button>
+      <p class="drawer-note">Descarga datos públicos (GWAS Catalog, ClinVar, PharmGKB) solo a esta máquina.
+        Es grande; se hace una vez y luego la app funciona sin conexión.</p>
+      <div id="update-log" class="update-log" hidden></div>
+    </div>
+  </aside>
+
+  <template id="tpl-result-row">
+    <details class="row">
+      <summary class="row-summary">
+        <label class="row-check" title="Seleccionar para el reporte">
+          <input type="checkbox" class="chk-row" aria-label="Seleccionar este resultado para el reporte" />
+        </label>
+        <span class="geno mono"></span>
+        <span class="row-main">
+          <span class="row-trait"></span>
+          <span class="row-meaning"></span>
+        </span>
+        <span class="row-source"></span>
+      </summary>
+      <div class="row-detail">
+        <div class="row-explain">
+          <span class="row-explain-label">¿Qué significa?</span>
+          <p class="row-explain-text"></p>
+        </div>
+        <p class="row-context"></p>
+        <div class="row-meta"></div>
+        <p class="row-health-note" hidden>⚠ Relacionado con la salud — <strong>no es un diagnóstico.</strong>
+          Los datos crudos de consumo se equivocan cerca del 40% de las veces en variantes clínicamente relevantes.
+          Confírmalo con una prueba de grado clínico y un/a profesional antes de actuar.</p>
+        <p class="row-strand-note mono" hidden></p>
+      </div>
+    </details>
+  </template>
+
+  <script src="/app.js"></script>
+</body>
+</html>
