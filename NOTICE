@@ -1,0 +1,75 @@
+ASSAY — local, privacy-first DNA trait reader
+Copyright (c) 2026 nsalloums. Licensed under the MIT License (see LICENSE).
+
+This product is for EDUCATIONAL use only. It is not a medical device and does not
+provide medical, diagnostic, or treatment advice. It was built by someone with no
+clinical or genetics training, with AI assistance, and has not been reviewed by a
+geneticist or clinician. See docs/how-this-was-built.md.
+
+This is a non-commercial, free and open-source project, supplied outside the course
+of any commercial activity. It is not sold, not hosted as a service for others, and
+carries no analytics, sponsorship, or donations.
+
+================================================================================
+Licensing summary
+================================================================================
+This product uses data from third-party sources under their own licenses; see
+"Annotation data sources" below for attribution and terms. Notably, PharmGKB data
+is licensed CC BY-SA 4.0 with additional terms restricting redistribution; this
+project references PharmGKB via local download rather than redistributing its data.
+No user genetic data is ever collected or transmitted.
+
+================================================================================
+Third-party software
+================================================================================
+
+apriha/snps — DNA raw-data parsing/normalization (BSD-3-Clause)
+    https://github.com/apriha/snps
+FastAPI (MIT), Starlette (BSD-3-Clause), Uvicorn (BSD-3-Clause),
+pandas (BSD-3-Clause), NumPy (BSD-3-Clause), python-multipart (Apache-2.0).
+Each retains its own copyright and license; see the respective packages.
+
+================================================================================
+Annotation data sources
+================================================================================
+The shipped curated seed (data/seed/associations.json) contains project-authored
+educational interpretations of well-replicated variants, drafted with AI assistance
+and NOT reviewed by a geneticist or clinician. Each association names the source
+database it was drawn from (below), but carries no per-association citation. The
+seed does NOT redistribute any third-party dataset file.
+
+NHGRI-EBI GWAS Catalog
+    SNP-trait associations. EMBL-EBI Terms of Use; freely reusable with citation.
+    Downloaded on-device by `update_databases`. Cite: Sollis et al., the GWAS
+    Catalog. https://www.ebi.ac.uk/gwas/
+
+NCBI ClinVar
+    Clinical significance of variants. Public domain (U.S. Government work).
+    Downloaded on-device by `update_databases`. Cite: Landrum et al., ClinVar.
+    https://www.ncbi.nlm.nih.gov/clinvar/
+
+ClinPGx (formerly PharmGKB)
+    Pharmacogenomics. PharmGKB merged into ClinPGx (with CPIC and PharmCAT) in
+    July 2025; pharmgkb.org URLs now redirect to clinpgx.org. The licence did not
+    change with the rebrand, and attribution is still owed to PharmGKB by name.
+    Licensed CC BY-SA 4.0 (copyleft), per the LICENSE.txt shipped inside the data
+    download itself, which additionally requires that:
+      - recipients of any altered/reused PharmGKB data first agree to the same
+        licence, and proof of that agreement be made available to PharmGKB; and
+      - "Under no circumstances can PharmGKB data be sold for other's private or
+        commercial use."
+    NOT redistributed with this software: it is downloaded onto the user's own
+    machine by `update_databases`, stored in its own source partition, and shown
+    with CC BY-SA 4.0 + PharmGKB attribution in-app. Any redistribution of a
+    PharmGKB-derived dataset must comply with CC BY-SA 4.0 and those terms.
+    Cite: https://www.clinpgx.org/page/citingPharmgkb
+    https://www.clinpgx.org/
+
+dbSNP / Ensembl (build-time support only)
+    rsID normalization and GRCh37/GRCh38 coordinates. dbSNP: public domain (NCBI).
+    Ensembl: no data-reuse restriction (EMBL-EBI). Used once, at build time, to
+    enrich the seed coordinates (scripts/enrich_seed_coords.py). Never contacted
+    at runtime and never sent any user data. Cite dbSNP and Ensembl.
+
+No user genetic data is ever collected, stored, transmitted, or used to train
+anything. All parsing and annotation happen locally on your device.

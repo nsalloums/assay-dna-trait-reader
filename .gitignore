@@ -1,0 +1,28 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local annotation database + downloaded source releases (rebuilt via `update_databases`)
+data/annotations.db
+data/annotations.db-wal
+data/annotations.db-shm
+data/manifest.json
+data/cache/
+data/downloads/
+
+# Synthetic test corpus (regenerated deterministically by tests)
+tests/corpus/
+
+# NEVER commit user DNA files. This app never stores them, but guard anyway.
+*.23andme.txt
+*_genome_*.txt
+user_*.txt
+*.dna
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

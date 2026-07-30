@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
+  <title>ASSAY — Local DNA trait reader</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%A7%AC%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Full-screen drag layer -->
+  <div id="drag-overlay" aria-hidden="true"><div data-i18n="drag_overlay">Drop your DNA file to read it — locally</div></div>
+
+  <!-- Instrument bar: hardware-style status strip -->
+  <header class="instrument-bar" role="banner">
+    <div class="ib-brand">
+      <span class="ib-mark" aria-hidden="true">🧬</span>
+      <span class="ib-title">ASSAY</span>
+      <span class="ib-sub" data-i18n="brand_sub">local DNA trait reader</span>
+    </div>
+    <div class="ib-readout" id="ib-readout">
+      <div class="ib-stat"><span class="ib-label" data-i18n="stat_vendor">vendor</span><span class="ib-value" id="stat-vendor">—</span></div>
+      <div class="ib-stat"><span class="ib-label" data-i18n="stat_build">build</span><span class="ib-value" id="stat-build">—</span></div>
+      <div class="ib-stat"><span class="ib-label">SNPs</span><span class="ib-value mono" id="stat-snps">0</span></div>
+      <div class="ib-stat"><span class="ib-label" data-i18n="stat_matches">matches</span><span class="ib-value mono" id="stat-matches">0</span></div>
+    </div>
+    <div class="ib-actions">
+      <button id="btn-freshness" class="btn-ghost" type="button" data-i18n-title="btn_freshness_title" title="Data sources and freshness">
+        <span class="dot" id="fresh-dot"></span> <span data-i18n="btn_freshness">Data sources</span>
+      </button>
+      <button id="btn-lang" class="btn-ghost" type="button" title="Leer en español / Read in English" aria-label="Language">ES</button>
+      <button id="btn-theme" class="btn-ghost icon" type="button" data-i18n-title="btn_theme_title" data-i18n-aria="btn_theme_aria" title="Toggle light/dark" aria-label="Toggle theme">◐</button>
+      <button id="btn-reset" class="btn-ghost" type="button" data-i18n="btn_reset" hidden>Load another file</button>
+    </div>
+  </header>
+
+  <!-- Permanent, non-dismissable notice -->
+  <div class="disclaimer" role="note" id="disclaimer-banner">
+    <strong data-i18n="disclaimer_strong">For educational and research use only — not a diagnosis.</strong>
+    <span id="disclaimer-text" data-i18n="disclaimer_text">Everything runs locally; your DNA never leaves this machine. Consumer raw-data genotypes
+    have a high false-positive rate (~40%) for clinically relevant variants — confirm any health result with a
+    clinical-grade test and a professional.</span>
+  </div>
+
+  <!-- Determinate progress bar (no infinite spinners) -->
+  <div class="meter" id="meter" hidden><div class="meter-fill" id="meter-fill"></div></div>
+
+  <main class="layout">
+    <!-- Landing / empty state -->
+    <section id="landing" class="landing">
+      <div class="drop" id="dropzone" tabindex="0" role="button"
+           data-i18n-aria="dropzone_aria" aria-label="Upload a DNA file — drag and drop or press Enter to browse">
+        <div class="drop-inner">
+          <div class="drop-icon" aria-hidden="true">⇪</div>
+          <h1 class="drop-title" data-i18n="drop_title">Drop your DNA file</h1>
+          <p class="drop-help">23andMe · AncestryDNA · FamilyTreeDNA · MyHeritage · LivingDNA · tellmeGen · CSV/TSV</p>
+          <p class="drop-privacy" data-i18n-html="drop_privacy">Processed <strong>on your device</strong> — files never leave this machine, and are not uploaded or stored.</p>
+          <button class="btn-primary" id="btn-browse" type="button" data-i18n="btn_browse">Choose a file…</button>
+          <input type="file" id="file-input" accept=".txt,.csv,.tsv,.zip,.gz" hidden />
+        </div>
+      </div>
+      <ol class="steps">
+        <li><span class="step-n">1</span> <span data-i18n="step1">Drop a file — it's processed locally in seconds.</span></li>
+        <li><span class="step-n">2</span> <span data-i18n="step2">Traits appear grouped by category, with source and date.</span></li>
+        <li><span class="step-n">3</span> <span data-i18n="step3">Nothing is uploaded, logged, or stored. On reload, it's gone.</span></li>
+      </ol>
+      <p class="landing-error" id="landing-error" hidden></p>
+    </section>
+
+    <!-- Results view -->
+    <section id="results-view" class="results-view" hidden>
+      <nav class="rail" id="category-rail" data-i18n-aria="rail_aria" aria-label="Trait categories">
+        <button class="rail-item active" data-cat="__all__">
+          <span class="rail-label" data-i18n="rail_all">All results</span><span class="rail-count mono" data-count>0</span>
+        </button>
+        <!-- categories are inserted here -->
+      </nav>
+
+      <div class="results-main">
+        <div class="toolbar">
+          <div class="search-wrap">
+            <input type="search" id="search" data-i18n-ph="search_ph" data-i18n-aria="search_aria" placeholder="Filter by trait, gene, or rsID…" aria-label="Filter results" />
+            <span class="search-count mono" id="search-count" aria-live="polite"></span>
+          </div>
+          <label class="chk"><input type="checkbox" id="filter-effect" /> <span data-i18n="filter_effect">Only genotypes with an effect</span></label>
+        </div>
+
+        <div class="health-gate" id="health-gate" hidden>
+          <div class="health-gate-body">
+            <strong data-i18n="health_gate_strong">Health-related results are hidden.</strong>
+            <span data-i18n="health_gate_body">These variants (carrier, disease risk, drug response) need extra care and
+            clinical confirmation. Found</span> <span class="mono" id="health-count-inline">0</span>.
+            <p class="health-gate-detail" id="health-gate-detail"></p>
+            <p class="health-gate-fp" id="health-gate-fp"></p>
+          </div>
+          <button class="btn-primary small" id="btn-show-health" type="button" data-i18n="btn_show_health">Show health results</button>
+        </div>
+
+        <div id="results" class="results" aria-live="polite"></div>
+        <div id="empty-note" class="empty-note" hidden></div>
+
+        <div id="selection-bar" class="selection-bar" role="region" data-i18n-aria="selection_aria" aria-label="Selection actions" hidden>
+          <span class="sel-count mono" id="sel-count" aria-live="polite">0 selected</span>
+          <div class="sel-actions">
+            <button type="button" class="btn-ghost" id="btn-select-visible" data-i18n="btn_select_visible">Select all visible</button>
+            <button type="button" class="btn-ghost" id="btn-clear-sel" data-i18n="btn_clear_sel">Clear</button>
+            <button type="button" class="btn-ghost" id="btn-report-html" data-i18n="btn_report_html">Download HTML</button>
+            <button type="button" class="btn-primary small" id="btn-report-print" data-i18n="btn_report_print">Print / PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Data sources / freshness panel -->
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="drawer" id="freshness-drawer" hidden data-i18n-aria="drawer_aria" aria-label="Annotation data sources">
+    <div class="drawer-head">
+      <h2 data-i18n="drawer_title">Annotation data sources</h2>
+      <button class="btn-ghost icon" id="btn-close-drawer" data-i18n-aria="close" aria-label="Close">✕</button>
+    </div>
+    <p class="drawer-lede" data-i18n-html="drawer_lede">The only time this app uses the network is to download these
+      <strong>public</strong> annotation databases — never your genotypes.</p>
+    <div id="sources-list" class="sources-list"></div>
+    <div class="drawer-actions">
+      <button class="btn-primary" id="btn-update" type="button" data-i18n="btn_update">Update from public databases</button>
+      <p class="drawer-note" data-i18n="drawer_note">Downloads public data (GWAS Catalog, ClinVar, PharmGKB) to this machine only.
+        It's large; done once, then the app works offline.</p>
+      <div id="update-log" class="update-log" hidden></div>
+    </div>
+  </aside>
+
+  <template id="tpl-result-row">
+    <details class="row">
+      <summary class="row-summary">
+        <label class="row-check">
+          <input type="checkbox" class="chk-row" />
+        </label>
+        <span class="geno mono"></span>
+        <span class="row-main">
+          <span class="row-trait"></span>
+          <span class="row-meaning"></span>
+        </span>
+        <span class="row-source"></span>
+      </summary>
+      <div class="row-detail">
+        <div class="row-explain">
+          <span class="row-explain-label"></span>
+          <p class="row-explain-text"></p>
+        </div>
+        <p class="row-context"></p>
+        <div class="row-meta"></div>
+        <p class="row-health-note" hidden></p>
+        <p class="row-strand-note mono" hidden></p>
+      </div>
+    </details>
+  </template>
+
+  <script src="/app.js"></script>
+</body>
+</html>

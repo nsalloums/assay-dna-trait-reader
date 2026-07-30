@@ -1,0 +1,1405 @@
+{
+  "schema_version": 1,
+  "description": "Curated educational seed of well-replicated SNP-trait associations. Interpretations are project-authored plain-language summaries, drafted with AI assistance and not reviewed by a geneticist or clinician; each names its source database (GWAS Catalog / ClinVar / PharmGKB) but carries no per-association citation. Coordinates/alleles from Ensembl. Redistributable (no PharmGKB data files are bundled).",
+  "trait_categories": [
+    {
+      "name": "appearance",
+      "sensitivity": "low",
+      "description": "Visible, high-signal physical traits: eye, hair, and skin color. Educational, not clinical.",
+      "description_es": "Rasgos físicos visibles y de gran señal: color de ojos, cabello y piel. Educativo, no clínico."
+    },
+    {
+      "name": "taste_and_smell",
+      "sensitivity": "low",
+      "description": "Taste and smell perception: bitterness, soapy cilantro, asparagus. Fun and low-risk.",
+      "description_es": "Percepción del gusto y el olfato: amargor, cilantro jabonoso, espárrago. Divertido y de bajo riesgo."
+    },
+    {
+      "name": "diet_and_metabolism",
+      "sensitivity": "low",
+      "description": "Non-clinical dietary response: lactose, caffeine, flushing, and alcohol metabolism. Tendencies, not diagnoses.",
+      "description_es": "Respuesta a la dieta no clínica: lactosa, cafeína, rubor y metabolismo del alcohol. Tendencias, no diagnósticos."
+    },
+    {
+      "name": "physical_performance",
+      "sensitivity": "low",
+      "description": "Muscle-fiber composition and exercise response (ACTN3). Recreational; small effects.",
+      "description_es": "Composición de fibra muscular y respuesta al ejercicio (ACTN3). Recreativo; efectos pequeños."
+    },
+    {
+      "name": "sensory_and_reflex",
+      "sensitivity": "low",
+      "description": "Curious reflexes and perceptions, like the light-induced sneeze. Just for fun.",
+      "description_es": "Reflejos y percepciones curiosas, como el estornudo con la luz. Solo por curiosidad."
+    },
+    {
+      "name": "behavioral_neuro_soft",
+      "sensitivity": "low",
+      "description": "Very weak behavioral associations (COMT, BDNF). Informational only, never actionable.",
+      "description_es": "Asociaciones de conducta muy débiles (COMT, BDNF). Solo informativo, nunca accionable."
+    },
+    {
+      "name": "carrier_and_metabolic_health",
+      "sensitivity": "health",
+      "description": "Carrier/metabolic variants (HFE, MTHFR). Shown with a health notice; wellness context only.",
+      "description_es": "Variantes de portador/metabólicas (HFE, MTHFR). Con aviso de salud; solo contexto de bienestar."
+    },
+    {
+      "name": "complex_disease_risk",
+      "sensitivity": "health",
+      "description": "Risk modifiers for common diseases (APOE, FTO, TCF7L2, CHRNA5). A single variant explains little.",
+      "description_es": "Modificadores de riesgo de enfermedades comunes (APOE, FTO, TCF7L2, CHRNA5). Una sola variante explica poco."
+    },
+    {
+      "name": "pharmacogenomics",
+      "sensitivity": "health",
+      "description": "Drug response (VKORC1, CYP2C9, CYP2C19, SLCO1B1). Real, but never adjust a dose based on this data.",
+      "description_es": "Respuesta a fármacos (VKORC1, CYP2C9, CYP2C19, SLCO1B1). Real, pero nunca ajustes dosis con estos datos."
+    }
+  ],
+  "disclaimers": {
+    "global_banner": "For educational and recreational use only — this is NOT a medical device, nor medical, diagnostic, or treatment advice. Everything runs locally on your machine; your DNA file and your results never leave this computer and are never uploaded or stored on any server. Genetics is just one of many influences on any trait. Do not make health, diet, or medication decisions based on this app. Consult a healthcare professional or a clinical genetics service for any medical concern.",
+    "health_result": "HEALTH-RELATED RESULT — READ FIRST. This variant is shown for educational purposes only and is NOT a diagnosis. Consumer genotyping chips are not clinical-grade: for rare or clinically relevant variants, close to 40% of 'risk' results in raw data are FALSE POSITIVES (chip artifacts) that would not be confirmed by clinical sequencing. Most conditions depend on many genes and the environment, so a single variant rarely determines the outcome, and penetrance is often incomplete. NEVER change medication, dosing, supplements, or diet based on this screen. If a result worries you, talk to a doctor or a clinical genetics service and confirm it at an accredited clinical laboratory before acting.",
+    "false_positive_note": "Why we warn twice on health: consumer DNA files are optimized for ancestry, not clinical accuracy. A genotype can be wrong due to probe cross-hybridization, strand/orientation mix-ups, no-calls read as calls, or errors on rare variants — which is why independent analyses find that ~40% of apparent pathogenic variants are not confirmed clinically. We only show well-replicated variants, we flag strand-ambiguous SNPs, and we still tell you: treat any health or pharmacogenomic result as a HYPOTHESIS to confirm with clinical testing, never as a fact.",
+    "global_banner_es": "Solo para uso educativo y recreativo — esto NO es un dispositivo médico ni consejo médico, diagnóstico o de tratamiento. Todo se ejecuta localmente en tu equipo; tu archivo de ADN y tus resultados nunca salen de esta máquina ni se suben o guardan en ningún servidor. La genética es solo una de muchas influencias en cualquier rasgo. No tomes decisiones de salud, dieta o medicación basándote en esta app. Consulta a un profesional de salud o a genética clínica para cualquier tema médico.",
+    "health_result_es": "RESULTADO RELACIONADO CON LA SALUD — LEE PRIMERO. Esta variante se muestra solo con fines educativos y NO es un diagnóstico. Los chips de genotipado de consumo no son de grado clínico: para variantes raras o clínicamente relevantes, cerca del 40% de los resultados de ‘riesgo’ en datos crudos son FALSOS POSITIVOS (artefactos del chip) y no se confirmarían con secuenciación clínica. La mayoría de las condiciones dependen de muchos genes y del entorno, así que una sola variante rara vez determina el resultado, y la penetrancia suele ser incompleta. NUNCA cambies medicación, dosis, suplementos ni dieta por esta pantalla. Si un resultado te preocupa, habla con un médico o con genética clínica y confírmalo en un laboratorio clínico acreditado antes de actuar.",
+    "false_positive_note_es": "Por qué avisamos dos veces en salud: los archivos de ADN de consumo están optimizados para ancestría, no para precisión clínica. Un genotipo puede estar mal por hibridación cruzada de sondas, líos de hebra/orientación, no-llamadas leídas como llamadas o errores en variantes raras — por eso análisis independientes encuentran que ~40% de las variantes patogénicas aparentes no se confirman clínicamente. Solo mostramos variantes bien replicadas, marcamos los SNP ambiguos de hebra y aun así te lo decimos: trata cualquier resultado de salud o farmacogenómico como una HIPÓTESIS a confirmar con pruebas clínicas, nunca como un hecho."
+  },
+  "strand_rules_summary": "Genotypes are normalized to the forward (+) strand of the human reference and sorted alphabetically ('AG', not 'GA') before comparison. Modern files (23andMe, AncestryDNA, FTDNA) already report on the + strand. For NON-palindromic SNPs, an old minus-strand read is detected and complemented (A↔T, C↔G). Palindromic SNPs (A/T or C/G) cannot be resolved by complement: we trust the vendor's + strand and flag them, without guessing. No-calls ('--', '00', 'NN', …) are dropped.",
+  "strand_rules_summary_es": "Los genotipos se normalizan a la hebra directa (+) de la referencia humana y se ordenan alfabéticamente (‘AG’ y no ‘GA’) antes de comparar. Los archivos modernos (23andMe, AncestryDNA, FTDNA) ya reportan en hebra +. En SNP NO palindrómicos, una lectura antigua en hebra − se detecta y se complementa (A↔T, C↔G). Los SNP palindrómicos (A/T o C/G) no se pueden resolver por complemento: confiamos en la hebra + del proveedor y los marcamos, sin adivinar. Las no-llamadas (‘--’, ‘00’, ‘NN’, …) se descartan.",
+  "haplotypes": [
+    {
+      "id": "apoe_isoform",
+      "trait": "APOE ε genotype (Alzheimer's risk and lipids)",
+      "gene": "APOE",
+      "category": "complex_disease_risk",
+      "sensitivity": "health",
+      "member_rsids": [
+        "rs429358",
+        "rs7412"
+      ],
+      "evidence": "ClinVar",
+      "plain_summary": "Your ε2/ε3/ε4 status is read by combining two SNPs (rs429358 + rs7412). ε4 raises, and ε2 lowers, the average risk of late-onset Alzheimer's and LDL — but it is a probabilistic modifier, NOT a diagnosis: many people with ε4 never develop Alzheimer's.",
+      "diplotypes": {
+        "TT|TT": {
+          "name": "ε2/ε2",
+          "effect": "ε2/ε2 — the lowest APOE-linked Alzheimer's risk (rare); may be associated with type III hyperlipoproteinemia.",
+          "magnitude": 2.5,
+          "effect_es": "ε2/ε2 — el menor riesgo de Alzheimer ligado a APOE (raro); puede asociarse a hiperlipoproteinemia tipo III."
+        },
+        "TT|CT": {
+          "name": "ε2/ε3",
+          "effect": "ε2/ε3 — below-average APOE Alzheimer's risk.",
+          "magnitude": 1.5,
+          "effect_es": "ε2/ε3 — riesgo de Alzheimer por APOE por debajo del promedio."
+        },
+        "TT|CC": {
+          "name": "ε3/ε3",
+          "effect": "ε3/ε3 — the most common genotype; average/reference APOE risk.",
+          "magnitude": 1.0,
+          "effect_es": "ε3/ε3 — el genotipo más común; riesgo APOE promedio/de referencia."
+        },
+        "CT|CT": {
+          "name": "ε2/ε4",
+          "effect": "ε2/ε4 — one protective and one risk allele; taken together, near average.",
+          "magnitude": 2.0,
+          "effect_es": "ε2/ε4 — un alelo protector y uno de riesgo; en conjunto cerca del promedio."
+        },
+        "CT|CC": {
+          "name": "ε3/ε4",
+          "effect": "ε3/ε4 — one ε4 allele; about 2–3× the average risk of late-onset Alzheimer's compared with ε3/ε3.",
+          "magnitude": 3.0,
+          "effect_es": "ε3/ε4 — un alelo ε4; unas 2–3× más riesgo medio de Alzheimer tardío que ε3/ε3."
+        },
+        "CC|CC": {
+          "name": "ε4/ε4",
+          "effect": "ε4/ε4 — two ε4 alleles; substantially higher average risk of late-onset Alzheimer's. Still probabilistic, not deterministic.",
+          "magnitude": 3.5,
+          "effect_es": "ε4/ε4 — dos alelos ε4; riesgo medio de Alzheimer tardío bastante mayor. Sigue siendo probabilístico, no determinante."
+        },
+        "CT|TT": {
+          "name": "ε1/ε2",
+          "effect": "ε1/ε2 — a very rare combination; uncertain interpretation. Confirm it clinically.",
+          "magnitude": 2.0,
+          "effect_es": "ε1/ε2 — combinación muy rara; interpretación incierta. Confírmalo clínicamente."
+        },
+        "CC|CT": {
+          "name": "ε1/ε4",
+          "effect": "ε1/ε4 — a very rare combination; uncertain interpretation. Confirm it clinically.",
+          "magnitude": 2.5,
+          "effect_es": "ε1/ε4 — combinación muy rara; interpretación incierta. Confírmalo clínicamente."
+        },
+        "CC|TT": {
+          "name": "ε1/ε1",
+          "effect": "ε1/ε1 — extremely rare; uncertain interpretation. Confirm it clinically.",
+          "magnitude": 2.0,
+          "effect_es": "ε1/ε1 — extremadamente raro; interpretación incierta. Confírmalo clínicamente."
+        }
+      },
+      "trait_es": "Genotipo APOE ε (riesgo de Alzheimer y lípidos)",
+      "plain_summary_es": "El estado ε2/ε3/ε4 se lee combinando dos SNP (rs429358 + rs7412). El ε4 sube, y el ε2 baja, el riesgo medio de Alzheimer tardío y el LDL — pero es un modificador probabilístico, NO un diagnóstico: muchas personas con ε4 nunca desarrollan Alzheimer."
+    }
+  ],
+  "associations": [
+    {
+      "rsid": "rs12913832",
+      "gene": "HERC2",
+      "trait": "Eye color (blue vs. brown)",
+      "trait_es": "Color de ojos (azul vs. marrón)",
+      "category": "appearance",
+      "sensitivity": "low",
+      "risk_allele": "G",
+      "curated_build": "GRCh37",
+      "chrom": "15",
+      "pos_b37": 28365618,
+      "pos_b38": 28120472,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "A/C/G",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "The strongest genetic switch for eye color. The G variant reduces melanin (light eyes) and A increases it (brown).",
+      "plain_summary_es": "El interruptor genético más fuerte del color de ojos. La variante G reduce la melanina (ojos claros) y la A la aumenta (marrón).",
+      "genotypes": {
+        "GG": {
+          "effect": "You most likely have blue eyes.",
+          "magnitude": 3,
+          "effect_es": "Lo más probable es que tengas los ojos azules."
+        },
+        "AG": {
+          "effect": "Intermediate eyes: green, hazel, or brown; usually not blue.",
+          "magnitude": 1.5,
+          "effect_es": "Ojos intermedios: verde, avellana o marrón; normalmente no azules."
+        },
+        "AA": {
+          "effect": "You most likely have brown eyes.",
+          "magnitude": 2,
+          "effect_es": "Lo más probable es que tengas los ojos marrones."
+        }
+      }
+    },
+    {
+      "rsid": "rs1800407",
+      "gene": "OCA2",
+      "trait": "Eye-color modifier (OCA2)",
+      "trait_es": "Modificador del color de ojos (OCA2)",
+      "category": "appearance",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "15",
+      "pos_b37": 28230318,
+      "pos_b38": 27985172,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "C/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "A secondary tweak to eye color; only meaningful together with rs12913832.",
+      "plain_summary_es": "Un ajuste secundario del color de ojos; solo tiene sentido junto con rs12913832.",
+      "genotypes": {
+        "GG": {
+          "effect": "This spot doesn't lighten your eyes.",
+          "magnitude": 0.5,
+          "effect_es": "Este punto no aclara tus ojos."
+        },
+        "AG": {
+          "effect": "A slight nudge toward green/hazel if you have a light eye background.",
+          "magnitude": 1,
+          "effect_es": "Ligero empujón hacia el verde/avellana si tienes fondo de ojos claros."
+        },
+        "AA": {
+          "effect": "A stronger nudge toward non-brown shades.",
+          "magnitude": 1.5,
+          "effect_es": "Empujón más marcado hacia tonos no marrones."
+        }
+      }
+    },
+    {
+      "rsid": "rs1426654",
+      "gene": "SLC24A5",
+      "trait": "Skin pigmentation",
+      "trait_es": "Pigmentación de la piel",
+      "category": "appearance",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "15",
+      "pos_b37": 48426484,
+      "pos_b38": 48134287,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "A/G/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "One of the largest-effect variants for human skin color.",
+      "plain_summary_es": "Una de las variantes de mayor efecto en el color de piel humano.",
+      "genotypes": {
+        "AA": {
+          "effect": "Lighter skin (very common European variant).",
+          "magnitude": 3,
+          "effect_es": "Piel más clara (variante europea muy común)."
+        },
+        "AG": {
+          "effect": "Intermediate pigmentation.",
+          "magnitude": 1.5,
+          "effect_es": "Pigmentación intermedia."
+        },
+        "GG": {
+          "effect": "Darker skin (ancestral variant).",
+          "magnitude": 2,
+          "effect_es": "Piel más oscura (variante ancestral)."
+        }
+      }
+    },
+    {
+      "rsid": "rs16891982",
+      "gene": "SLC45A2",
+      "trait": "Skin and hair pigmentation (SLC45A2)",
+      "trait_es": "Pigmentación de piel y cabello (SLC45A2)",
+      "category": "appearance",
+      "sensitivity": "low",
+      "risk_allele": "G",
+      "curated_build": "GRCh37",
+      "chrom": "5",
+      "pos_b37": 33951693,
+      "pos_b38": 33951588,
+      "alleles_forward": "C/G",
+      "ensembl_allele_string": "C/A/G",
+      "ambiguous_strand": true,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "An important pigmentation locus. It's a palindromic SNP (C/G): we trust the vendor's orientation.",
+      "plain_summary_es": "Locus importante de pigmentación. Es un SNP palindrómico (C/G): confiamos en la orientación del proveedor.",
+      "genotypes": {
+        "GG": {
+          "effect": "Lighter pigmentation (typically European).",
+          "magnitude": 2.5,
+          "effect_es": "Pigmentación más clara (típica europea)."
+        },
+        "CG": {
+          "effect": "Intermediate pigmentation.",
+          "magnitude": 1.5,
+          "effect_es": "Pigmentación intermedia."
+        },
+        "CC": {
+          "effect": "Darker pigmentation.",
+          "magnitude": 2,
+          "effect_es": "Pigmentación más oscura."
+        }
+      }
+    },
+    {
+      "rsid": "rs1805007",
+      "gene": "MC1R",
+      "trait": "Red hair / fair skin (MC1R R151C)",
+      "trait_es": "Pelo rojo / piel clara (MC1R R151C)",
+      "category": "appearance",
+      "sensitivity": "low",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "16",
+      "pos_b37": 89986117,
+      "pos_b38": 89919709,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/A/G/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "The classic MC1R red-hair variant. Red hair usually needs two copies of these kinds of variants.",
+      "plain_summary_es": "Variante clásica del pelo rojo en MC1R. El pelo rojo suele necesitar dos copias de este tipo de variantes.",
+      "genotypes": {
+        "TT": {
+          "effect": "Red hair very likely, fair skin, freckles, and sun sensitivity.",
+          "magnitude": 3,
+          "effect_es": "Pelo rojo muy probable, piel clara, pecas y sensibilidad al sol."
+        },
+        "CT": {
+          "effect": "Carrier: possible copper tint, freckles, and more sun sensitivity.",
+          "magnitude": 1.5,
+          "effect_es": "Portador/a: posible tono cobrizo, pecas y más sensibilidad al sol."
+        },
+        "CC": {
+          "effect": "No red-hair effect from this variant.",
+          "magnitude": 0.5,
+          "effect_es": "Sin efecto de pelo rojo por esta variante."
+        }
+      }
+    },
+    {
+      "rsid": "rs1805008",
+      "gene": "MC1R",
+      "trait": "Red hair / fair skin (MC1R R160W)",
+      "trait_es": "Pelo rojo / piel clara (MC1R R160W)",
+      "category": "appearance",
+      "sensitivity": "low",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "16",
+      "pos_b37": 89986144,
+      "pos_b38": 89919736,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "A second common MC1R red-hair variant; interpreted together with rs1805007.",
+      "plain_summary_es": "Segunda variante común de pelo rojo en MC1R; se interpreta junto con rs1805007.",
+      "genotypes": {
+        "TT": {
+          "effect": "Red hair likely; fair, freckled, sun-sensitive skin.",
+          "magnitude": 2.5,
+          "effect_es": "Pelo rojo probable; piel clara, pecosa y sensible al sol."
+        },
+        "CT": {
+          "effect": "Carrier of an MC1R variant; combined with others it raises the chance of red hair.",
+          "magnitude": 1.5,
+          "effect_es": "Portador/a de una variante MC1R; combinada con otras sube la probabilidad de pelo rojo."
+        },
+        "CC": {
+          "effect": "No red-hair effect from this variant.",
+          "magnitude": 0.5,
+          "effect_es": "Sin efecto de pelo rojo por esta variante."
+        }
+      }
+    },
+    {
+      "rsid": "rs12203592",
+      "gene": "IRF4",
+      "trait": "Hair color, freckles, and tanning (IRF4)",
+      "trait_es": "Color de cabello, pecas y bronceado (IRF4)",
+      "category": "appearance",
+      "sensitivity": "low",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "6",
+      "pos_b37": 396321,
+      "pos_b38": 396321,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/G/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "A strong modifier of freckling and hair lightening.",
+      "plain_summary_es": "Modificador fuerte de pecas y aclaramiento del cabello.",
+      "genotypes": {
+        "TT": {
+          "effect": "Lighter hair in childhood, more freckles, and poorer tanning.",
+          "magnitude": 2,
+          "effect_es": "Cabello más claro de niño/a, más pecas y peor bronceado."
+        },
+        "CT": {
+          "effect": "Intermediate freckling and tanning.",
+          "magnitude": 1,
+          "effect_es": "Pecas y bronceado intermedios."
+        },
+        "CC": {
+          "effect": "Darker hair; you tan more easily.",
+          "magnitude": 1,
+          "effect_es": "Cabello más oscuro; te bronceas con más facilidad."
+        }
+      }
+    },
+    {
+      "rsid": "rs713598",
+      "gene": "TAS2R38",
+      "trait": "Bitter-taste perception (PTC)",
+      "trait_es": "Percepción del sabor amargo (PTC)",
+      "category": "taste_and_smell",
+      "sensitivity": "low",
+      "risk_allele": "G",
+      "curated_build": "GRCh37",
+      "chrom": "7",
+      "pos_b37": 141673345,
+      "pos_b38": 141973545,
+      "alleles_forward": "C/G",
+      "ensembl_allele_string": "C/A/G/T",
+      "ambiguous_strand": true,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "Determines whether you strongly taste PTC/PROP bitterness. It's a palindromic SNP (C/G): we trust the vendor's orientation.",
+      "plain_summary_es": "Determina si percibes fuerte el amargor del PTC/PROP. Es un SNP palindrómico (C/G): confiamos en la orientación del proveedor.",
+      "genotypes": {
+        "GG": {
+          "effect": "Taster: you strongly perceive the bitterness.",
+          "magnitude": 2,
+          "effect_es": "Catador/a: percibes con fuerza el amargor."
+        },
+        "CG": {
+          "effect": "Intermediate taster.",
+          "magnitude": 1,
+          "effect_es": "Catador/a intermedio/a."
+        },
+        "CC": {
+          "effect": "Non-taster: you perceive little or none of that bitterness.",
+          "magnitude": 1.5,
+          "effect_es": "No catador/a: percibes poco o nada ese amargor."
+        }
+      }
+    },
+    {
+      "rsid": "rs1726866",
+      "gene": "TAS2R38",
+      "trait": "Bitter taste (TAS2R38 supporting marker)",
+      "trait_es": "Sabor amargo (marcador de apoyo TAS2R38)",
+      "category": "taste_and_smell",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "7",
+      "pos_b37": 141672705,
+      "pos_b38": 141972905,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "G/A",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "A second site in the TAS2R38 gene; helps confirm whether you're a taster.",
+      "plain_summary_es": "Segundo punto del gen TAS2R38; ayuda a confirmar si eres catador/a.",
+      "genotypes": {
+        "GG": {
+          "effect": "Associated with perceiving the bitterness.",
+          "magnitude": 1.5,
+          "effect_es": "Asociado a percibir el amargor."
+        },
+        "AG": {
+          "effect": "Intermediate.",
+          "magnitude": 1,
+          "effect_es": "Intermedio."
+        },
+        "AA": {
+          "effect": "Associated with not perceiving the bitterness.",
+          "magnitude": 1.5,
+          "effect_es": "Asociado a no percibir el amargor."
+        }
+      }
+    },
+    {
+      "rsid": "rs17822931",
+      "gene": "ABCC11",
+      "trait": "Earwax type and body odor (ABCC11)",
+      "trait_es": "Tipo de cerumen y olor corporal (ABCC11)",
+      "category": "taste_and_smell",
+      "sensitivity": "low",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "16",
+      "pos_b37": 48258198,
+      "pos_b38": 48224287,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/G/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "A Mendelian trait: it sets wet/dry earwax and the amount of underarm odor.",
+      "plain_summary_es": "Rasgo mendeliano: define cerumen húmedo/seco y la cantidad de olor axilar.",
+      "genotypes": {
+        "TT": {
+          "effect": "Dry earwax and less body odor (variant common in East Asia).",
+          "magnitude": 2.5,
+          "effect_es": "Cerumen seco y menos olor corporal (variante común en Asia Oriental)."
+        },
+        "CT": {
+          "effect": "Wet earwax (dominant) and typical body odor.",
+          "magnitude": 1,
+          "effect_es": "Cerumen húmedo (dominante) y olor corporal típico."
+        },
+        "CC": {
+          "effect": "Wet earwax and typical body odor.",
+          "magnitude": 1.5,
+          "effect_es": "Cerumen húmedo y olor corporal típico."
+        }
+      }
+    },
+    {
+      "rsid": "rs72921001",
+      "gene": "OR6A2",
+      "trait": "Cilantro tastes soapy",
+      "trait_es": "Cilantro con sabor a jabón",
+      "category": "taste_and_smell",
+      "sensitivity": "low",
+      "risk_allele": "C",
+      "curated_build": "GRCh37",
+      "chrom": "11",
+      "pos_b37": 6889648,
+      "pos_b38": 6868417,
+      "alleles_forward": "A/C",
+      "ensembl_allele_string": "C/A",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "Near a cluster of olfactory receptors; the C variant is associated with perceiving cilantro as soapy.",
+      "plain_summary_es": "Cerca de un grupo de receptores del olfato; la variante C se asocia a percibir el cilantro como jabonoso.",
+      "genotypes": {
+        "CC": {
+          "effect": "More likely that cilantro tastes soapy to you.",
+          "magnitude": 1.5,
+          "effect_es": "Más probable que el cilantro te sepa a jabón."
+        },
+        "AC": {
+          "effect": "Somewhat more likely to notice a soapy hint.",
+          "magnitude": 1,
+          "effect_es": "Algo más probable que notes un toque jabonoso."
+        },
+        "AA": {
+          "effect": "Less likely that cilantro tastes soapy to you.",
+          "magnitude": 0.5,
+          "effect_es": "Menos probable que el cilantro te sepa a jabón."
+        }
+      }
+    },
+    {
+      "rsid": "rs4481887",
+      "gene": "OR2M7",
+      "trait": "Smelling asparagus in urine",
+      "trait_es": "Oler el espárrago en la orina",
+      "category": "taste_and_smell",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "1",
+      "pos_b37": 248496863,
+      "pos_b38": 248333561,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "A/G/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "An olfactory-receptor variant that decides whether you notice the asparagus smell in urine.",
+      "plain_summary_es": "Variante de receptores del olfato que decide si notas el olor del espárrago en la orina.",
+      "genotypes": {
+        "AA": {
+          "effect": "You detect the asparagus smell in urine better.",
+          "magnitude": 1.5,
+          "effect_es": "Detectas mejor el olor del espárrago en la orina."
+        },
+        "AG": {
+          "effect": "Intermediate detection ability.",
+          "magnitude": 1,
+          "effect_es": "Capacidad de detección intermedia."
+        },
+        "GG": {
+          "effect": "More likely that you can't smell it ('asparagus anosmia').",
+          "magnitude": 1,
+          "effect_es": "Más probable que no lo huelas (‘anosmia al espárrago’)."
+        }
+      }
+    },
+    {
+      "rsid": "rs4988235",
+      "gene": "MCM6/LCT",
+      "trait": "Lactose tolerance in adulthood",
+      "trait_es": "Tolerancia a la lactosa en la edad adulta",
+      "category": "diet_and_metabolism",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "2",
+      "pos_b37": 136608646,
+      "pos_b38": 135851076,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "G/A/C/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "The well-known '-13910C>T': the A (persistence) variant usually lets you digest dairy as an adult.",
+      "plain_summary_es": "La conocida ‘-13910C>T’: la variante A (persistencia) suele permitir digerir lácteos de adulto/a.",
+      "genotypes": {
+        "AA": {
+          "effect": "You usually tolerate dairy in adulthood.",
+          "magnitude": 2.5,
+          "effect_es": "Sueles tolerar los lácteos en la edad adulta."
+        },
+        "AG": {
+          "effect": "You usually tolerate dairy (persistence is dominant).",
+          "magnitude": 2,
+          "effect_es": "Sueles tolerar los lácteos (la persistencia es dominante)."
+        },
+        "GG": {
+          "effect": "More likely lactose intolerant as an adult (European context).",
+          "magnitude": 2,
+          "effect_es": "Más probable intolerancia a la lactosa de adulto/a (contexto europeo)."
+        }
+      }
+    },
+    {
+      "rsid": "rs762551",
+      "gene": "CYP1A2",
+      "trait": "Speed of caffeine metabolism",
+      "trait_es": "Velocidad para metabolizar la cafeína",
+      "category": "diet_and_metabolism",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "15",
+      "pos_b37": 75041917,
+      "pos_b38": 74749576,
+      "alleles_forward": "A/C",
+      "ensembl_allele_string": "C/A/G",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "The A variant metabolizes caffeine fast; with C it tends to be slower. It's a tendency, not a rule.",
+      "plain_summary_es": "La variante A metaboliza rápido la cafeína; con C tiende a ser más lenta. Es una tendencia, no una regla.",
+      "genotypes": {
+        "AA": {
+          "effect": "Fast metabolizer: you clear caffeine quickly.",
+          "magnitude": 2,
+          "effect_es": "Metabolizador/a rápido/a: eliminas la cafeína deprisa."
+        },
+        "AC": {
+          "effect": "Slow-to-intermediate metabolizer.",
+          "magnitude": 1.5,
+          "effect_es": "Metabolizador/a lento/a-intermedio/a."
+        },
+        "CC": {
+          "effect": "Slow metabolizer: caffeine lasts longer (more jitters/insomnia).",
+          "magnitude": 1.5,
+          "effect_es": "Metabolizador/a lento/a: la cafeína dura más (más nervios/insomnio)."
+        }
+      }
+    },
+    {
+      "rsid": "rs671",
+      "gene": "ALDH2",
+      "trait": "Facial flushing with alcohol",
+      "trait_es": "Rubor facial con el alcohol",
+      "category": "diet_and_metabolism",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "12",
+      "pos_b37": 112241766,
+      "pos_b38": 111803962,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "G/A",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "The A variant (ALDH2*2, common in East Asia) causes acetaldehyde to build up and flushing to appear. An educational trait, not a health assessment.",
+      "plain_summary_es": "La variante A (ALDH2*2, común en Asia Oriental) hace que se acumule acetaldehído y aparezca el rubor. Rasgo educativo, no una evaluación de salud.",
+      "genotypes": {
+        "AA": {
+          "effect": "Intense flushing; you can barely metabolize acetaldehyde.",
+          "magnitude": 3.5,
+          "effect_es": "Rubor intenso; casi no puedes metabolizar el acetaldehído."
+        },
+        "AG": {
+          "effect": "Flushing, nausea, and rapid heartbeat with alcohol (partial deficiency).",
+          "magnitude": 3,
+          "effect_es": "Rubor, náuseas y taquicardia con el alcohol (déficit parcial)."
+        },
+        "GG": {
+          "effect": "Typical alcohol metabolism; no flushing from this variant.",
+          "magnitude": 1,
+          "effect_es": "Metabolismo del alcohol típico; sin rubor por esta variante."
+        }
+      }
+    },
+    {
+      "rsid": "rs1229984",
+      "gene": "ADH1B",
+      "trait": "Speed of alcohol metabolism (ADH1B)",
+      "trait_es": "Velocidad para metabolizar el alcohol (ADH1B)",
+      "category": "diet_and_metabolism",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "4",
+      "pos_b37": 100239319,
+      "pos_b38": 99318162,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "T/A/C/G",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "The A variant (ADH1B*2) oxidizes alcohol quickly; associated with lower dependence. Interpreted together with rs671.",
+      "plain_summary_es": "La variante A (ADH1B*2) oxida el alcohol rápido; se asocia a menor dependencia. Se interpreta junto con rs671.",
+      "genotypes": {
+        "AA": {
+          "effect": "Very fast metabolism; alcohol is often unpleasant.",
+          "magnitude": 2.5,
+          "effect_es": "Metabolismo muy rápido; a menudo el alcohol resulta desagradable."
+        },
+        "AG": {
+          "effect": "One fast copy: you convert alcohol faster than typical.",
+          "magnitude": 2,
+          "effect_es": "Una copia rápida: conviertes el alcohol más deprisa de lo típico."
+        },
+        "GG": {
+          "effect": "Typical metabolism.",
+          "magnitude": 1,
+          "effect_es": "Metabolismo típico."
+        }
+      }
+    },
+    {
+      "rsid": "rs1815739",
+      "gene": "ACTN3",
+      "trait": "Muscle-fiber type (ACTN3, the 'sprint gene')",
+      "trait_es": "Tipo de fibra muscular (ACTN3, ‘gen del sprint’)",
+      "category": "physical_performance",
+      "sensitivity": "low",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "11",
+      "pos_b37": 66328095,
+      "pos_b38": 66560624,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/A/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "The C variant favors power/speed; T, endurance. A small, recreational effect that doesn't predict talent.",
+      "plain_summary_es": "La variante C favorece potencia/velocidad; la T, resistencia. Efecto pequeño y recreativo, no predice talento.",
+      "genotypes": {
+        "CC": {
+          "effect": "Fast-twitch fiber: a power/speed-oriented profile.",
+          "magnitude": 2,
+          "effect_es": "Fibra rápida: perfil orientado a potencia/velocidad."
+        },
+        "CT": {
+          "effect": "Mixed: one functional copy.",
+          "magnitude": 1,
+          "effect_es": "Mixto: una copia funcional."
+        },
+        "TT": {
+          "effect": "No alpha-actinin-3: a more endurance-oriented profile (very common).",
+          "magnitude": 2,
+          "effect_es": "Sin alfa-actinina-3: perfil más de resistencia (muy común)."
+        }
+      }
+    },
+    {
+      "rsid": "rs10427255",
+      "gene": "ZEB2 (near)",
+      "trait": "Light-induced sneeze (ACHOO reflex)",
+      "trait_es": "Estornudo con la luz (reflejo ACHOO)",
+      "category": "sensory_and_reflex",
+      "sensitivity": "low",
+      "risk_allele": "C",
+      "curated_build": "GRCh37",
+      "chrom": "2",
+      "pos_b37": 146125523,
+      "pos_b38": 145367955,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "The reflex of sneezing when moving from shade into bright light.",
+      "plain_summary_es": "El reflejo de estornudar al pasar de la sombra a la luz brillante.",
+      "genotypes": {
+        "CC": {
+          "effect": "More likely to sneeze in bright light.",
+          "magnitude": 1.5,
+          "effect_es": "Más probable que estornudes con la luz brillante."
+        },
+        "CT": {
+          "effect": "Somewhat more likely to have the reflex.",
+          "magnitude": 1,
+          "effect_es": "Algo más probable que tengas el reflejo."
+        },
+        "TT": {
+          "effect": "Less likely to sneeze in light.",
+          "magnitude": 0.5,
+          "effect_es": "Menos probable que estornudes con la luz."
+        }
+      }
+    },
+    {
+      "rsid": "rs4680",
+      "gene": "COMT",
+      "trait": "Dopamine metabolism (COMT, 'warrior/worrier')",
+      "trait_es": "Metabolismo de la dopamina (COMT, ‘guerrero/preocupado’)",
+      "category": "behavioral_neuro_soft",
+      "sensitivity": "low",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "22",
+      "pos_b37": 19951271,
+      "pos_b38": 19963748,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "G/A",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "A very low predictive-value curiosity. For information only, not psychology.",
+      "plain_summary_es": "Curiosidad de muy bajo valor predictivo. Solo a modo informativo, no es psicología.",
+      "genotypes": {
+        "GG": {
+          "effect": "Val/Val 'warrior': you clear dopamine faster; often more stable under stress.",
+          "magnitude": 1,
+          "effect_es": "Val/Val ‘guerrero’: aclaras la dopamina más rápido; a menudo más estable bajo estrés."
+        },
+        "AG": {
+          "effect": "Intermediate.",
+          "magnitude": 0.5,
+          "effect_es": "Intermedio."
+        },
+        "AA": {
+          "effect": "Met/Met 'worrier': you clear it more slowly; associated with stress sensitivity.",
+          "magnitude": 1,
+          "effect_es": "Met/Met ‘preocupado’: aclaras más lento; asociado a sensibilidad al estrés."
+        }
+      }
+    },
+    {
+      "rsid": "rs6265",
+      "gene": "BDNF",
+      "trait": "BDNF Val66Met (memory/plasticity, weak)",
+      "trait_es": "BDNF Val66Met (memoria/plasticidad, débil)",
+      "category": "behavioral_neuro_soft",
+      "sensitivity": "low",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "11",
+      "pos_b37": 27679916,
+      "pos_b38": 27658369,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "Weak and inconsistent behavioral associations; strictly educational.",
+      "plain_summary_es": "Asociaciones de conducta débiles e inconsistentes; estrictamente educativo.",
+      "genotypes": {
+        "CC": {
+          "effect": "Val/Val: typical BDNF secretion.",
+          "magnitude": 1,
+          "effect_es": "Val/Val: secreción de BDNF típica."
+        },
+        "CT": {
+          "effect": "One Met copy.",
+          "magnitude": 0.5,
+          "effect_es": "Una copia Met."
+        },
+        "TT": {
+          "effect": "Met/Met: somewhat different BDNF secretion in some studies.",
+          "magnitude": 1,
+          "effect_es": "Met/Met: secreción de BDNF algo distinta en algunos estudios."
+        }
+      }
+    },
+    {
+      "rsid": "rs1801133",
+      "gene": "MTHFR",
+      "trait": "MTHFR C677T (folate enzyme)",
+      "trait_es": "MTHFR C677T (enzima del folato)",
+      "category": "carrier_and_metabolic_health",
+      "sensitivity": "health",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "1",
+      "pos_b37": 11856378,
+      "pos_b38": 11796321,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "G/A/C",
+      "ambiguous_strand": false,
+      "evidence": "ClinVar",
+      "plain_summary": "Popular but heavily overrated: genetics societies do NOT recommend testing it routinely. Wellness context only.",
+      "plain_summary_es": "Popular pero muy sobrevalorado: las sociedades de genética NO recomiendan analizarlo de rutina. Solo contexto de bienestar.",
+      "genotypes": {
+        "GG": {
+          "effect": "Normal MTHFR activity (677CC).",
+          "magnitude": 1,
+          "effect_es": "Actividad normal de MTHFR (677CC)."
+        },
+        "AG": {
+          "effect": "~65% activity (677CT): one reduced-function copy.",
+          "magnitude": 1.5,
+          "effect_es": "~65% de actividad (677CT): una copia de función reducida."
+        },
+        "AA": {
+          "effect": "~30% activity (677TT): thermolabile enzyme; may slightly raise homocysteine.",
+          "magnitude": 2,
+          "effect_es": "~30% de actividad (677TT): enzima termolábil; puede subir algo la homocisteína."
+        }
+      }
+    },
+    {
+      "rsid": "rs1801131",
+      "gene": "MTHFR",
+      "trait": "MTHFR A1298C",
+      "trait_es": "MTHFR A1298C",
+      "category": "carrier_and_metabolic_health",
+      "sensitivity": "health",
+      "risk_allele": "G",
+      "curated_build": "GRCh37",
+      "chrom": "1",
+      "pos_b37": 11854476,
+      "pos_b38": 11794419,
+      "alleles_forward": "G/T",
+      "ensembl_allele_string": "T/G",
+      "ambiguous_strand": false,
+      "evidence": "ClinVar",
+      "plain_summary": "A minor effect; same don't-overinterpret caveat as C677T.",
+      "plain_summary_es": "Efecto menor; mismo aviso de no sobreinterpretar que el C677T.",
+      "genotypes": {
+        "TT": {
+          "effect": "Normal (1298AA).",
+          "magnitude": 1,
+          "effect_es": "Normal (1298AA)."
+        },
+        "GT": {
+          "effect": "One 1298C copy; slight reduction in activity.",
+          "magnitude": 1,
+          "effect_es": "Una copia 1298C; ligera reducción de actividad."
+        },
+        "GG": {
+          "effect": "1298CC; modest reduction in activity.",
+          "magnitude": 1.5,
+          "effect_es": "1298CC; reducción de actividad modesta."
+        }
+      }
+    },
+    {
+      "rsid": "rs1800562",
+      "gene": "HFE",
+      "trait": "Hereditary hemochromatosis (HFE C282Y)",
+      "trait_es": "Hemocromatosis hereditaria (HFE C282Y)",
+      "category": "carrier_and_metabolic_health",
+      "sensitivity": "health",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "6",
+      "pos_b37": 26093141,
+      "pos_b38": 26092913,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "G/A",
+      "ambiguous_strand": false,
+      "evidence": "ClinVar",
+      "plain_summary": "The best-characterized iron-overload variant, but with INCOMPLETE penetrance: many AA people never develop overload.",
+      "plain_summary_es": "La variante mejor caracterizada de sobrecarga de hierro, pero de penetrancia INCOMPLETA: muchas personas AA nunca desarrollan sobrecarga.",
+      "genotypes": {
+        "GG": {
+          "effect": "Without the C282Y variant.",
+          "magnitude": 1,
+          "effect_es": "Sin la variante C282Y."
+        },
+        "AG": {
+          "effect": "C282Y carrier: usually no symptoms.",
+          "magnitude": 2,
+          "effect_es": "Portador/a de C282Y: normalmente sin síntomas."
+        },
+        "AA": {
+          "effect": "C282Y homozygous: the main risk genotype (variable penetrance). Requires a clinical iron workup.",
+          "magnitude": 3,
+          "effect_es": "C282Y en homocigosis: principal genotipo de riesgo (penetrancia variable). Requiere estudio clínico de hierro."
+        }
+      }
+    },
+    {
+      "rsid": "rs1799945",
+      "gene": "HFE",
+      "trait": "HFE H63D (iron modifier)",
+      "trait_es": "HFE H63D (modificador del hierro)",
+      "category": "carrier_and_metabolic_health",
+      "sensitivity": "health",
+      "risk_allele": "G",
+      "curated_build": "GRCh37",
+      "chrom": "6",
+      "pos_b37": 26091179,
+      "pos_b38": 26090951,
+      "alleles_forward": "C/G",
+      "ensembl_allele_string": "C/G/T",
+      "ambiguous_strand": true,
+      "evidence": "ClinVar",
+      "plain_summary": "A palindromic SNP (C/G): we trust the vendor's orientation. Low penetrance; only relevant together with C282Y.",
+      "plain_summary_es": "SNP palindrómico (C/G): confiamos en la orientación del proveedor. Baja penetrancia; solo relevante junto con C282Y.",
+      "genotypes": {
+        "CC": {
+          "effect": "Without the H63D variant.",
+          "magnitude": 1,
+          "effect_es": "Sin la variante H63D."
+        },
+        "CG": {
+          "effect": "H63D carrier: usually benign on its own.",
+          "magnitude": 1.5,
+          "effect_es": "Portador/a de H63D: normalmente benigno por sí solo."
+        },
+        "GG": {
+          "effect": "H63D homozygous: a mild effect; together with C282Y it raises risk.",
+          "magnitude": 2,
+          "effect_es": "H63D en homocigosis: efecto leve; junto con C282Y sube el riesgo."
+        }
+      }
+    },
+    {
+      "rsid": "rs429358",
+      "gene": "APOE",
+      "trait": "APOE — site 1 (Alzheimer's and lipids)",
+      "trait_es": "APOE — sitio 1 (Alzheimer y lípidos)",
+      "category": "complex_disease_risk",
+      "sensitivity": "health",
+      "risk_allele": "C",
+      "curated_build": "GRCh37",
+      "chrom": "19",
+      "pos_b37": 45411941,
+      "pos_b38": 44908684,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "T/C",
+      "ambiguous_strand": false,
+      "evidence": "ClinVar",
+      "plain_summary": "Must be combined with rs7412 to read the APOE genotype (see the haplotype result). The most important Alzheimer's risk locus.",
+      "plain_summary_es": "Se debe combinar con rs7412 para leer el genotipo APOE (ver el resultado de haplotipo). Locus de riesgo de Alzheimer más importante.",
+      "genotypes": {
+        "TT": {
+          "effect": "No ε4 from this site (ε2 or ε3 background).",
+          "magnitude": 1,
+          "effect_es": "Sin ε4 desde este punto (fondo ε2 o ε3)."
+        },
+        "CT": {
+          "effect": "One ε4-defining allele present.",
+          "magnitude": 2.5,
+          "effect_es": "Un alelo que define ε4 presente."
+        },
+        "CC": {
+          "effect": "Two ε4-defining alleles (with rs7412 C = ε4/ε4).",
+          "magnitude": 3.5,
+          "effect_es": "Dos alelos que definen ε4 (con rs7412 C = ε4/ε4)."
+        }
+      }
+    },
+    {
+      "rsid": "rs7412",
+      "gene": "APOE",
+      "trait": "APOE — site 2 (Alzheimer's and lipids)",
+      "trait_es": "APOE — sitio 2 (Alzheimer y lípidos)",
+      "category": "complex_disease_risk",
+      "sensitivity": "health",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "19",
+      "pos_b37": 45412079,
+      "pos_b38": 44908822,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/T",
+      "ambiguous_strand": false,
+      "evidence": "ClinVar",
+      "plain_summary": "Combine it with rs429358 to read ε2/ε3/ε4. ε2 lowers LDL and Alzheimer's risk.",
+      "plain_summary_es": "Combínalo con rs429358 para leer ε2/ε3/ε4. El ε2 baja el LDL y el riesgo de Alzheimer.",
+      "genotypes": {
+        "CC": {
+          "effect": "No ε2 from this site (ε3 or ε4 background).",
+          "magnitude": 1,
+          "effect_es": "Sin ε2 desde este punto (fondo ε3 o ε4)."
+        },
+        "CT": {
+          "effect": "One ε2-defining allele.",
+          "magnitude": 2,
+          "effect_es": "Un alelo que define ε2."
+        },
+        "TT": {
+          "effect": "Two ε2-defining alleles (ε2/ε2, with rs429358 T).",
+          "magnitude": 2.5,
+          "effect_es": "Dos alelos que definen ε2 (ε2/ε2, con rs429358 T)."
+        }
+      }
+    },
+    {
+      "rsid": "rs9939609",
+      "gene": "FTO",
+      "trait": "Body mass index (FTO)",
+      "trait_es": "Índice de masa corporal (FTO)",
+      "category": "complex_disease_risk",
+      "sensitivity": "health",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "16",
+      "pos_b37": 53820527,
+      "pos_b38": 53786615,
+      "alleles_forward": "A/T",
+      "ensembl_allele_string": "T/A",
+      "ambiguous_strand": true,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "A palindromic SNP (A/T): we trust the vendor's orientation. A small per-allele effect that's highly modifiable by lifestyle; not deterministic.",
+      "plain_summary_es": "SNP palindrómico (A/T): confiamos en la orientación del proveedor. Efecto por alelo pequeño y muy modificable por el estilo de vida; no es determinante.",
+      "genotypes": {
+        "AA": {
+          "effect": "A tendency toward a slightly higher BMI (~+3 kg vs. TT at the population level).",
+          "magnitude": 2,
+          "effect_es": "Tendencia a un IMC algo mayor (~+3 kg vs. TT a nivel poblacional)."
+        },
+        "AT": {
+          "effect": "Intermediate.",
+          "magnitude": 1,
+          "effect_es": "Intermedio."
+        },
+        "TT": {
+          "effect": "A tendency toward a slightly lower BMI from this site.",
+          "magnitude": 1,
+          "effect_es": "Tendencia a un IMC algo menor desde este punto."
+        }
+      }
+    },
+    {
+      "rsid": "rs7903146",
+      "gene": "TCF7L2",
+      "trait": "Type 2 diabetes predisposition (TCF7L2)",
+      "trait_es": "Predisposición a diabetes tipo 2 (TCF7L2)",
+      "category": "complex_disease_risk",
+      "sensitivity": "health",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "10",
+      "pos_b37": 114758349,
+      "pos_b38": 112998590,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/G/T",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "The common variant most associated with type 2 diabetes, but it's only a modifier: lifestyle and family history weigh more.",
+      "plain_summary_es": "La variante común más asociada a diabetes tipo 2, pero solo es un modificador: pesan más el estilo de vida y los antecedentes familiares.",
+      "genotypes": {
+        "CC": {
+          "effect": "Lower risk from this site.",
+          "magnitude": 1,
+          "effect_es": "Menor riesgo desde este punto."
+        },
+        "CT": {
+          "effect": "About 1.4× per-allele risk of type 2 diabetes.",
+          "magnitude": 1.5,
+          "effect_es": "Riesgo ~1,4× por alelo de diabetes tipo 2."
+        },
+        "TT": {
+          "effect": "The highest risk from a single common variant (~2×).",
+          "magnitude": 2,
+          "effect_es": "El mayor riesgo de una sola variante común (~2×)."
+        }
+      }
+    },
+    {
+      "rsid": "rs16969968",
+      "gene": "CHRNA5",
+      "trait": "Nicotine dependence (CHRNA5)",
+      "trait_es": "Dependencia de la nicotina (CHRNA5)",
+      "category": "complex_disease_risk",
+      "sensitivity": "health",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "15",
+      "pos_b37": 78882925,
+      "pos_b38": 78590583,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "G/A",
+      "ambiguous_strand": false,
+      "evidence": "GWAS Catalog",
+      "plain_summary": "Only relevant in people who smoke; associated with cigarettes per day and difficulty quitting.",
+      "plain_summary_es": "Solo relevante en personas fumadoras; asociado a cigarrillos por día y a dificultad para dejarlo.",
+      "genotypes": {
+        "GG": {
+          "effect": "Lower tendency toward dependence from this site.",
+          "magnitude": 1,
+          "effect_es": "Menor tendencia a la dependencia desde este punto."
+        },
+        "AG": {
+          "effect": "Intermediate.",
+          "magnitude": 1,
+          "effect_es": "Intermedio."
+        },
+        "AA": {
+          "effect": "Greater dependence, heavier use, and harder to quit.",
+          "magnitude": 1.5,
+          "effect_es": "Mayor dependencia, consumo más intenso y más difícil de dejar."
+        }
+      }
+    },
+    {
+      "rsid": "rs9923231",
+      "gene": "VKORC1",
+      "trait": "Warfarin sensitivity (dose)",
+      "trait_es": "Sensibilidad a la warfarina (dosis)",
+      "category": "pharmacogenomics",
+      "sensitivity": "health",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "16",
+      "pos_b37": 31107689,
+      "pos_b38": 31096368,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/A/G/T",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "The '-1639G>A': the T variant indicates sensitivity and a lower dose. Strong evidence, but NEVER adjust a dose with direct-to-consumer data.",
+      "plain_summary_es": "La ‘-1639G>A’: la variante T indica sensibilidad y dosis más baja. Evidencia sólida, pero NUNCA ajustes dosis con datos de consumo directo.",
+      "genotypes": {
+        "CC": {
+          "effect": "Normal VKORC1 expression: standard warfarin dose.",
+          "magnitude": 1.5,
+          "effect_es": "Expresión normal de VKORC1: dosis estándar de warfarina."
+        },
+        "CT": {
+          "effect": "Greater sensitivity: usually a lower dose is needed.",
+          "magnitude": 2,
+          "effect_es": "Mayor sensibilidad: suele necesitarse una dosis menor."
+        },
+        "TT": {
+          "effect": "High sensitivity: a considerably lower warfarin dose.",
+          "magnitude": 2.5,
+          "effect_es": "Alta sensibilidad: dosis de warfarina bastante más baja."
+        }
+      }
+    },
+    {
+      "rsid": "rs1799853",
+      "gene": "CYP2C9",
+      "trait": "CYP2C9*2 — reduced drug metabolism",
+      "trait_es": "CYP2C9*2 — metabolismo reducido de fármacos",
+      "category": "pharmacogenomics",
+      "sensitivity": "health",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "10",
+      "pos_b37": 96702047,
+      "pos_b38": 94942290,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/A/T",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "Combines with rs1057910 (*3) and VKORC1 for warfarin. Informational only.",
+      "plain_summary_es": "Se combina con rs1057910 (*3) y VKORC1 para la warfarina. Solo informativo.",
+      "genotypes": {
+        "CC": {
+          "effect": "Normal (*1) at this site.",
+          "magnitude": 1,
+          "effect_es": "Normal (*1) en este punto."
+        },
+        "CT": {
+          "effect": "One *2 allele: reduced metabolism (warfarin, NSAIDs, phenytoin).",
+          "magnitude": 2,
+          "effect_es": "Un alelo *2: metabolismo reducido (warfarina, AINE, fenitoína)."
+        },
+        "TT": {
+          "effect": "*2/*2: greatly reduced metabolism.",
+          "magnitude": 2.5,
+          "effect_es": "*2/*2: metabolismo muy reducido."
+        }
+      }
+    },
+    {
+      "rsid": "rs1057910",
+      "gene": "CYP2C9",
+      "trait": "CYP2C9*3 — reduced drug metabolism",
+      "trait_es": "CYP2C9*3 — metabolismo reducido de fármacos",
+      "category": "pharmacogenomics",
+      "sensitivity": "health",
+      "risk_allele": "C",
+      "curated_build": "GRCh37",
+      "chrom": "10",
+      "pos_b37": 96741053,
+      "pos_b38": 94981296,
+      "alleles_forward": "A/C",
+      "ensembl_allele_string": "A/C/G",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "Forms a star diplotype with rs1799853; a larger effect than *2.",
+      "plain_summary_es": "Forma un diplotipo de estrella con rs1799853; efecto mayor que el *2.",
+      "genotypes": {
+        "AA": {
+          "effect": "Normal (*1) at this site.",
+          "magnitude": 1,
+          "effect_es": "Normal (*1) en este punto."
+        },
+        "AC": {
+          "effect": "One *3 allele: considerably reduced metabolism.",
+          "magnitude": 2.5,
+          "effect_es": "Un alelo *3: metabolismo bastante reducido."
+        },
+        "CC": {
+          "effect": "*3/*3: poor metabolizer.",
+          "magnitude": 3,
+          "effect_es": "*3/*3: metabolizador/a pobre."
+        }
+      }
+    },
+    {
+      "rsid": "rs4244285",
+      "gene": "CYP2C19",
+      "trait": "CYP2C19*2 — loss of function (clopidogrel)",
+      "trait_es": "CYP2C19*2 — pérdida de función (clopidogrel)",
+      "category": "pharmacogenomics",
+      "sensitivity": "health",
+      "risk_allele": "A",
+      "curated_build": "GRCh37",
+      "chrom": "10",
+      "pos_b37": 96541616,
+      "pos_b38": 94781859,
+      "alleles_forward": "A/G",
+      "ensembl_allele_string": "G/A/C/T",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "The most common loss-of-function allele of CYP2C19. Informational; confirm it clinically.",
+      "plain_summary_es": "El alelo de pérdida de función más común de CYP2C19. Informativo; confírmalo clínicamente.",
+      "genotypes": {
+        "GG": {
+          "effect": "Normal function (*1) at this site.",
+          "magnitude": 1,
+          "effect_es": "Función normal (*1) en este punto."
+        },
+        "AG": {
+          "effect": "One null *2 allele: intermediate metabolizer.",
+          "magnitude": 2,
+          "effect_es": "Un alelo nulo *2: metabolizador/a intermedio/a."
+        },
+        "AA": {
+          "effect": "*2/*2: poor metabolizer; less clopidogrel activation.",
+          "magnitude": 2.5,
+          "effect_es": "*2/*2: metabolizador/a pobre; menos activación del clopidogrel."
+        }
+      }
+    },
+    {
+      "rsid": "rs12248560",
+      "gene": "CYP2C19",
+      "trait": "CYP2C19*17 — increased function",
+      "trait_es": "CYP2C19*17 — función aumentada",
+      "category": "pharmacogenomics",
+      "sensitivity": "health",
+      "risk_allele": "T",
+      "curated_build": "GRCh37",
+      "chrom": "10",
+      "pos_b37": 96521657,
+      "pos_b38": 94761900,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "C/A/T",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "Interpreted together with *2 to assign the CYP2C19 phenotype.",
+      "plain_summary_es": "Se interpreta junto con *2 para asignar el fenotipo de CYP2C19.",
+      "genotypes": {
+        "CC": {
+          "effect": "No *17 at this site.",
+          "magnitude": 1,
+          "effect_es": "Sin *17 en este punto."
+        },
+        "CT": {
+          "effect": "One *17 allele: rapid metabolizer.",
+          "magnitude": 1.5,
+          "effect_es": "Un alelo *17: metabolizador/a rápido/a."
+        },
+        "TT": {
+          "effect": "*17/*17: ultrarapid metabolizer.",
+          "magnitude": 2,
+          "effect_es": "*17/*17: metabolizador/a ultrarrápido/a."
+        }
+      }
+    },
+    {
+      "rsid": "rs4149056",
+      "gene": "SLCO1B1",
+      "trait": "Statin myopathy risk (SLCO1B1 *5)",
+      "trait_es": "Riesgo de miopatía por estatinas (SLCO1B1 *5)",
+      "category": "pharmacogenomics",
+      "sensitivity": "health",
+      "risk_allele": "C",
+      "curated_build": "GRCh37",
+      "chrom": "12",
+      "pos_b37": 21331549,
+      "pos_b38": 21178615,
+      "alleles_forward": "C/T",
+      "ensembl_allele_string": "T/A/C",
+      "ambiguous_strand": false,
+      "evidence": "PharmGKB",
+      "plain_summary": "There is clinical guidance (especially for simvastatin), but the result is advisory: discuss it with your prescriber.",
+      "plain_summary_es": "Existe guía clínica (sobre todo con simvastatina), pero el resultado es orientativo: coméntalo con quien te receta.",
+      "genotypes": {
+        "TT": {
+          "effect": "Normal transporter function: typical myopathy risk.",
+          "magnitude": 1,
+          "effect_es": "Función normal del transportador: riesgo típico de miopatía."
+        },
+        "CT": {
+          "effect": "Reduced function: higher myopathy risk with simvastatin.",
+          "magnitude": 2,
+          "effect_es": "Función reducida: mayor riesgo de miopatía con simvastatina."
+        },
+        "CC": {
+          "effect": "Low function: highest myopathy risk with high-dose simvastatin.",
+          "magnitude": 2.5,
+          "effect_es": "Función baja: máximo riesgo de miopatía con simvastatina a dosis alta."
+        }
+      }
+    }
+  ]
+}

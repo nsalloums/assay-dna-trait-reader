@@ -1,0 +1,4 @@
+# Development / test dependencies (in addition to requirements.txt)
+-r requirements.txt
+pytest==9.1.1
+httpx==0.28.1   # for FastAPI/Starlette TestClient
