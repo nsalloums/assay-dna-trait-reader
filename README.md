@@ -25,6 +25,23 @@ runs in your browser: no backend, nothing uploaded.
 
 ---
 
+## Why it's called ASSAY
+
+An **assay** is a laboratory procedure that detects or measures what is present in a sample.
+A **genotyping assay** is precisely the step that produced the file you drop into this app:
+the chip 23andMe or AncestryDNA ran on your saliva to call which alleles you carry at a few
+hundred thousand positions.
+
+The name is deliberately modest about which half of that this project is. ASSAY performs no
+assay — it measures nothing. It is the reader on the other end: it takes the calls the lab
+already made and tells you what is associated with them. That is also why the interface is
+styled after a laboratory instrument rather than a health app.
+
+The word itself comes from Old French *essai*, "trial, test" — from Late Latin *exagium*,
+"a weighing" — and is a doublet of *essay*.
+
+---
+
 ## Provenance and limits (read this first)
 
 I built this **myself, with no clinical or genetics training**, via AI multi-agent
