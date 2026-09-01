@@ -6,4 +6,4 @@ uvicorn[standard]==0.51.0
 python-multipart==0.0.20   # multipart upload parsing for /api/parse
 # transitively required by snps
 pandas==3.0.3
-numpy==2.5.1
+numpy==2.5.2
